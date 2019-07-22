@@ -20,7 +20,10 @@ class DetailMeal extends StatelessWidget{
               children: <Widget>[
                 AspectRatio(
                   aspectRatio: 15/10,
-                  child: Image.network(meal.strMealThumb, fit: BoxFit.fitWidth),
+                  child: Hero(
+                      tag: meal.idMeal.toString(),
+                      child: Image.network(meal.strMealThumb, fit: BoxFit.fitWidth)
+                  ),
                 ),
                 Text(
                   meal.strMeal,

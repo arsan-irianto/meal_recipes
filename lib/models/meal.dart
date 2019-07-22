@@ -1,3 +1,6 @@
+import 'dart:async' show Future;
+
+
 class Meal {
   final String strMeal;
   final String strMealThumb;

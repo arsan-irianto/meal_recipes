@@ -1,83 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recipes/detail_meal.dart';
-import 'package:meal_recipes/models/meal.dart';
-import 'package:meal_recipes/models/meal_repository.dart';
+import 'package:meal_recipes/breakfast_page.dart';
+import 'package:meal_recipes/dessert_page.dart';
 
 void main() => runApp(MealApp());
 
 class MealApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new HomeMeal(),
+    return MaterialApp(
+      home: MealBottomNav(),
     );
   }
 }
 
-class HomeMeal extends StatelessWidget {
+class MealBottomNav extends StatefulWidget {
+  MealBottomNav({ Key key }) : super(key : key);
 
-  // Build Home with GridView
+  @override
+  MealBottomNavState createState() => MealBottomNavState();
+}
+
+class MealBottomNavState extends State<MealBottomNav> {
+
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  List<Widget> _widgetOptions = <Widget> [
+    BreakfastPage(),
+    DessertPage()
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text('Seafood Meals'),
-      ),
+    return Scaffold(
       body: Center(
-        child: GridView.count(
-          crossAxisCount: 2,
-          padding: EdgeInsets.all(4),
-          childAspectRatio: 8/9,
-          children: mealCards(context),
-        ),
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Breakfast')
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              title: Text('Dessert')
+          )
+        ],
+        currentIndex: _selectedIndex,
+        fixedColor: Colors.amber[900],
+        onTap: _onItemTapped,
+      ),
     );
   }
 
-  // Load Data Meals to CardView
-  List<GestureDetector> mealCards(BuildContext context)  {
-    List<Meal> mealsData = MealRepository.loadMeals();
-
-    return mealsData.map((meal) {
-      return GestureDetector(
-        onTap: () {
-          print("Tapped" + meal.strMeal);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => new DetailMeal(meal)
-              )
-          );
-        },
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: 18/15,
-                child: Image.network(meal.strMealThumb, fit: BoxFit.fitWidth),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        meal.strMeal,
-                        maxLines: 3,
-                        style: Theme.of(context).textTheme.body2,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }).toList();
-  }
 }
-
