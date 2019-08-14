@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recipes/breakfast_page.dart';
-import 'package:meal_recipes/dessert_page.dart';
+import 'package:meal_recipes/views/seafood_page.dart';
+import 'package:meal_recipes/views/dessert_page.dart';
 
 void main() => runApp(MealApp());
 
@@ -25,8 +25,8 @@ class MealBottomNavState extends State<MealBottomNav> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget> [
-    BreakfastPage(),
-    DessertPage()
+    SeafoodPage(),
+    DessertPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -45,7 +45,7 @@ class MealBottomNavState extends State<MealBottomNav> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Breakfast')
+            title: Text('Seafood')
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.business),
