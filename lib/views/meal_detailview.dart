@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_recipes/models/meal.dart';
 
 class MealDetailView extends StatelessWidget {
-  final MealDetails meal;
+  final dynamic meal;
   MealDetailView({Key key, this.meal}) : super(key:key);
 
   @override
@@ -17,6 +17,7 @@ class MealDetailView extends StatelessWidget {
               child: Hero(
                   tag: meal.idMeal.toString(),
                   child: Image.network(meal.strMealThumb, fit: BoxFit.fitWidth)
+                  //child: Image.network(meal.strMealThumb, fit: BoxFit.fitWidth)
               ),
             ),
             Text(

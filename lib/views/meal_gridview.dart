@@ -1,28 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recipes/models/meal.dart';
 import 'package:meal_recipes/views/detail_meal_page.dart';
 
-class MealGridView extends StatelessWidget  {
-  final List<Meal> meals;
-  MealGridView({Key key, this.meals}) : super(key:key);
+class MealGridView extends StatefulWidget {
+  final List<dynamic> meals;
+  final String mealCategory;
+  MealGridView(this.meals, this.mealCategory);
+
+  @override
+  _MealGridViewState createState() => _MealGridViewState();
+}
+
+class _MealGridViewState extends State<MealGridView> {
+
+  List<dynamic> meals;
+
+  @override
+  void initState() {
+    if (widget.meals != null){
+      meals = widget.meals;
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+      key: Key('gridview_builder'),
       crossAxisCount: 2,
       padding: EdgeInsets.all(4),
       childAspectRatio: 8/9,
       children: List.generate(meals.length, (index){
-        return mealCard(context, meals[index]);
+        return mealCard(context, meals[index], index);
       }),
     );
   }
 
-  GestureDetector mealCard(BuildContext context, Meal meal) {
+  GestureDetector mealCard(BuildContext context, dynamic meal, int index) {
     return GestureDetector(
       onLongPress: () {
         final snackBar = SnackBar(
-          content: Text("Meal : " + meal.strMeal),
+          content: Text("Meal : " + meal.strMeal + " mealCategory : " + widget.mealCategory),
         );
         Scaffold.of(context).showSnackBar(snackBar);
       },
@@ -30,11 +48,12 @@ class MealGridView extends StatelessWidget  {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DetailMealPage(meal)
+                builder: (context) => DetailMealPage(meal, widget.mealCategory)
             )
         );
       },
       child: Card(
+        key: Key('item_${index}_text'),
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

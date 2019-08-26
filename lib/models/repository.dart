@@ -13,7 +13,6 @@ Future<List<Meal>> fetchMeals(url) async {
     Meal newMeal = Meal(meal['strMeal'], meal['strMealThumb'], meal['idMeal']);
     meals.add(newMeal);
   }
-
   return meals;
 }
 
