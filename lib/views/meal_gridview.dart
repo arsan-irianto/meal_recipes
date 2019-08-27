@@ -53,7 +53,6 @@ class _MealGridViewState extends State<MealGridView> {
         );
       },
       child: Card(
-        key: Key('item_${index}_text'),
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

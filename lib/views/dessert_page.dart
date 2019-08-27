@@ -17,6 +17,7 @@ class DessertPage extends StatelessWidget {
         title: Text('Dessert Meals'),
         actions: <Widget>[
           IconButton(
+            key: Key('search'),
             tooltip: "Search Dessert",
             icon: Icon(
               Icons.search,
