@@ -31,7 +31,6 @@ class SearchMeal extends SearchDelegate<String>{
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        tooltip: "ClearSearch",
         icon: Icon(Icons.clear),
         onPressed: (){
           query = '';

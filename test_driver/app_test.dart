@@ -28,38 +28,7 @@ void main() {
       await driver.scroll(find.byValueKey("gridview_builder"), 0, 3000, Duration(seconds: 3));
     });
 
-    // Click Detail of First Item and set Favorite
-    test('Click Detail of First Item and set Favorite', () async {
-      await driver.waitFor(find.text("Apple & Blackberry Crumble"));
-      await driver.tap(find.text("Apple & Blackberry Crumble"));
-      await driver.waitFor(find.byTooltip("52893"));
-      await driver.tap(find.byTooltip("52893"));
-    });
-
-    // Tap Back Button to Dessert Page
-    test('Tap Back Button to Dessert Page', () async{
-      await driver.waitFor(find.byTooltip("Back"));
-      await driver.tap(find.byTooltip("Back"));
-    });
-
-    // Check Search Bar on Dessert Page Functionality
-    test('Check Search Bar on Dessert Page Functionality', () async{
-      await driver.waitFor(find.byTooltip("Search Dessert"));
-      await driver.tap(find.byTooltip("Search Dessert"));
-      print('Search Clicked');
-      await driver.waitFor(find.byTooltip("SearchMeal") );
-      await driver.tap(find.byTooltip("SearchMeal"));
-      print('Get SearchMeal tooltip');
-      await driver.enterText("apple");
-      //await driver.enterText("apple");
-      //print('SearchMeal Found and clicked');
-      //await driver.enterText("apple");
-      //print("Enter Text filled");
-    });
-
-
     // Show Bottom Navigation Dessert displayed and check all data with Srolling gridView
-/*
     test('Meal Bottom Navigation Seafood', () async {
       await driver.waitFor(find.text("Seafood"));
       await driver.tap(find.text("Seafood"));
@@ -73,7 +42,6 @@ void main() {
       await driver.waitFor(find.text("Favorites") );
       await driver.tap(find.text("Favorites"));
     });
-*/
 
 
     // Get Detail Dessert after tap one Dessert Card set Favorite and Back to Dessert Page
